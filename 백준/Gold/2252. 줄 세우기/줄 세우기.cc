@@ -24,35 +24,32 @@ void solve() {
 
 	queue<int> q;
 	int cnt = 0;
-	while (1) {
 
-
-		for (int i = 1; i <= N; i++) {
-			if (DAT[i] == 0 && visited[i]==0) {
-				q.push(i);
-				visited[i] = 1;
-				break;
-			}
+	for (int i = 1; i <= N; i++) {
+		if (DAT[i] == 0) {
+			q.push(i);
+			visited[i] = 1;
 		}
-
-		while (!q.empty()) {
-			int now = q.front();
-			q.pop();
-
-			cout << now << ' ';
-			cnt++;
-
-			int len = v[now].size();
-			for (int i = 0; i < len; i++) {
-				DAT[v[now][i]]--;
-				if (DAT[v[now][i]] == 0 && visited[v[now][i]]==0) {
-					q.push(v[now][i]);
-					visited[v[now][i]] = 1;
-				}
-			}
-		}
-		if (cnt == N)break;
 	}
+
+	while (!q.empty()) {
+		int now = q.front();
+		q.pop();
+
+		cout << now << ' ';
+		cnt++;
+
+		int len = v[now].size();
+		for (int i = 0; i < len; i++) {
+			DAT[v[now][i]]--;
+			if (DAT[v[now][i]] == 0 && visited[v[now][i]] == 0) {
+				q.push(v[now][i]);
+				visited[v[now][i]] = 1;
+			}
+		}
+	}
+
+
 
 }
 
