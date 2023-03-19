@@ -7,7 +7,6 @@ using namespace std;
 int N, M;
 vector<int> v[32111];
 int DAT[32111];
-int visited[32111];
 
 void init() {
 	cin >> N >> M;
@@ -28,7 +27,6 @@ void solve() {
 	for (int i = 1; i <= N; i++) {
 		if (DAT[i] == 0) {
 			q.push(i);
-			visited[i] = 1;
 		}
 	}
 
@@ -42,9 +40,8 @@ void solve() {
 		int len = v[now].size();
 		for (int i = 0; i < len; i++) {
 			DAT[v[now][i]]--;
-			if (DAT[v[now][i]] == 0 && visited[v[now][i]] == 0) {
+			if (DAT[v[now][i]] == 0) {
 				q.push(v[now][i]);
-				visited[v[now][i]] = 1;
 			}
 		}
 	}
