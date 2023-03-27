@@ -9,8 +9,7 @@ int N;
 int K;
 int Target;
 int arr[1010];
-//vector<vector<int>> Graph;
-int Graph[1010][1010];
+vector<int> Graph[1010];
 int DAT[1010];
 
 struct node {
@@ -23,10 +22,11 @@ void init()
 	memset(arr, 0, sizeof(arr));
 	memset(DAT, 0, sizeof(DAT));
 	memset(Graph, 0, sizeof(Graph));
+	/*for (int i = 0;i < 1010;++i)
+	{
+		Graph[i].clear();
+	}*/
 	cin >> N >> K;
-	//Graph.clear();
-	//Graph.shrink_to_fit();
-	
 	for (int i = 1;i <= N;++i) {
 		cin >> arr[i];
 		DAT[i] = arr[i];
@@ -34,8 +34,7 @@ void init()
 	for (int i = 0;i < K;++i) {
 		int from, to;
 		cin >> from >> to;
-		Graph[to][from] = 1;
-		//Graph[to].push_back(from);
+		Graph[to].push_back(from);
 	}
 	cin >> Target;
 
@@ -62,15 +61,17 @@ int main() {
 
 			if (DAT[now.pos] > now.cost)continue;
 
-			for (int i = 1;i <= N;++i) {
-				if (Graph[now.pos][i] == 0)continue;
-				int NextCost = now.cost + arr[i];
-				if (NextCost <= DAT[i])continue;
-				DAT[i] = NextCost;
-				ans = max(ans, NextCost);
-				q.push({ i,NextCost });
-			}
+			int nowsize = Graph[now.pos].size();
 
+			for (int i = 0;i < nowsize;++i) {
+				int next = Graph[now.pos][i];
+
+				int NextCost = now.cost + arr[next];
+				if (NextCost <= DAT[next]) continue;
+				DAT[next] = NextCost;
+				ans = max(ans, NextCost);
+				q.push({ next,NextCost });
+			}
 		}
 		cout << ans << '\n';
 	}
