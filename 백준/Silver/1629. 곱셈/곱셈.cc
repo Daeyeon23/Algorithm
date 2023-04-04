@@ -15,12 +15,13 @@ ll solve(int m) {
 	if (m == 1) {
 		return a % c;
 	}
-	
+	ll temp = solve(m / 2) % c;
+
 	if (m % 2 == 1) { // b가 2면
-		return (solve(m / 2) % c * solve(m / 2 + 1) % c) % c;
+		return temp * (temp * a % c) % c;
 	}
 	else {
-		ll temp = solve(m / 2) % c;
+		
 		return temp * temp % c;
 	}
 }
