@@ -15,7 +15,7 @@ int main() {
 	}
 
 	int Min = 21e8;
-	int ans = 0;
+	long long ans = 0;
 	for (int i = 0; i < N; ++i) {
 		int cost;
 		cin >> cost;
